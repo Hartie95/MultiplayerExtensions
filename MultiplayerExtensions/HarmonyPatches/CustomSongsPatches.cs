@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using System.Threading.Tasks;
-using BeatSaverSharp;
+using BeatSaverSharp.Models;
 using System.Linq;
 using UnityEngine.UI;
 
@@ -50,7 +50,7 @@ namespace MultiplayerExtensions.HarmonyPatches
             if (SongCore.Collections.songWithHashPresent(hash))
                 __result = Task.FromResult(EntitlementsStatus.Ok);
             else
-                __result = Plugin.BeatSaver.Hash(hash).ContinueWith<EntitlementsStatus>(r =>
+                __result = Plugin.BeatSaver.BeatmapByHash(hash).ContinueWith<EntitlementsStatus>(r =>
                 {
                     Beatmap? beatmap = r.Result;
                     if (beatmap == null)
